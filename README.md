@@ -12,7 +12,10 @@ Because I used matplotlib in a research project recently, while also working on 
 ### *Graphing Functions:*
     CreateBarGraphFromData()
 - Makes a bar graph
-    `ClearGraphs()`
+
+  ```
+    ClearGraphs()
+  ```
 - Clears graphs from memory
 
 ### Additional Utility Functions included:
