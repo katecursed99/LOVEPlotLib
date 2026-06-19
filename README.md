@@ -1,6 +1,8 @@
 # LÖVEPlötLïb
-MatPlotLib-style graphing in LÖVE 2D
 v0.1 (just bar graphs for now!)
+
+MatPlotLib-style graphing in LÖVE 2D
+
 Katherina Jesek 2026 - MIT License
 
 <img width="591" height="577" alt="Screenshot 2026-06-19 at 2 58 38 PM" src="https://github.com/user-attachments/assets/7816f44b-dffd-40e5-91ad-3778260027a4" />
