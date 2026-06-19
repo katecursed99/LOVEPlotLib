@@ -3,7 +3,8 @@ MatPlotLib-style graphing in LÖVE 2D
 v0.1 (just bar graphs for now!)
 Katherina Jesek 2026 - MIT License
 
-<img width="591" height="577" alt="Screenshot 2026-06-19 at 2 58 38 PM" src="https://github.com/user-attachments/assets/3c7413db-4499-4381-82c8-f60ee7770b03" />
+<img width="591" height="577" alt="Screenshot 2026-06-19 at 2 58 38 PM" src="https://github.com/user-attachments/assets/7816f44b-dffd-40e5-91ad-3778260027a4" />
+
 
 ##### Why did I make this?
 Because I used matplotlib in a research project recently, while also working on a strategy RPG on the train ride, and visualizing stat matchups is cool.
