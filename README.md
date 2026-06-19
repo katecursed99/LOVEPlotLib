@@ -1,4 +1,4 @@
-# LOVEPlotLib
+# LÖVEPlötLïb
 MatPlotLib-style graphing in LÖVE 2D
 v0.1 (just bar graphs for now!)
 Katherina Jesek 2026 - MIT License
