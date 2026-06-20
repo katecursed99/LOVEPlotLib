@@ -37,6 +37,12 @@ function CreateBarGraphFromData(categories, datapoints, x, y, w, h, max_val, mar
 	new_graph.y = y
 	new_graph.w = w
 	new_graph.h = h
+	new_graph.box_outline = true
+	new_graph.bar_outline = false
+	new_graph.animate_intro = true
+	new_graph.intro_length = 0.8
+	new_graph.intro_timer = new_graph.intro_length
+	new_graph.intro_timer_mapped = 0
 	new_graph.title = ""
 	new_graph.title_offset_x = 0
 	new_graph.title_offset_y = 0
@@ -50,7 +56,7 @@ function CreateBarGraphFromData(categories, datapoints, x, y, w, h, max_val, mar
 	new_graph.y_label_offset_y = 0
 	new_graph.x_label_offset_x = 0
 	new_graph.x_label_offset_y = 0
-	new_graph.round = 3
+	new_graph.round = 1
 	new_graph.bar_outline_thickness = 4
 	new_graph.bar_outline_color = {1,1,1,1}
 	new_graph.box_outline_thickness = 4
@@ -58,6 +64,12 @@ function CreateBarGraphFromData(categories, datapoints, x, y, w, h, max_val, mar
 	new_graph.hide_y_labels = false
 	new_graph.hide_x_labels = false
 	new_graph.color_type = "value"
+	if max_val == nil then
+		new_graph.dynamic_scale = true
+
+	else
+		new_graph.dynamic_scale = false
+	end
 	new_graph.max = max_val or TableMax(datapoints)
 	new_graph["ticks"] = 5
 	new_graph["tick_val"] = new_graph.max / new_graph.ticks
@@ -108,7 +120,7 @@ function CreateBarGraphFromData(categories, datapoints, x, y, w, h, max_val, mar
 		--if color_index == 0 then color_index = 1 end
 		-- insert the color for the bar
 		table.insert(new_graph.colors_per_bar, new_graph.colors[color_index])
-		local bar_h = ratio*(h-new_graph.margin_ver*2)
+		local bar_h = ratio*(h-new_graph.margin_ver*2-new_graph.margin_ver/5)
 		new_graph.mapped_data[index] = bar_h
 	end
 	new_graph["ticks_rev"] = ReverseInPlace(new_graph.tick_pos)
@@ -118,6 +130,7 @@ function CreateBarGraphFromData(categories, datapoints, x, y, w, h, max_val, mar
 	new_graph["rot_buffer"] = love.graphics.newCanvas(new_graph.h, new_graph.h)
 	-- do a drawing function based on type
 	new_graph["draw"] = BarGraphDraw
+	new_graph["upd"] = BarGraphUpd
 	-- add to the handling list
 	table.insert(graph_manager, new_graph)
 	return graph_manager[#graph_manager]
@@ -125,6 +138,40 @@ end
 
 function ClearGraphs()
 	graph_manager = {}
+end
+
+---@param self self
+---@param dt number
+function BarGraphUpd(self, dt)
+	-- handle animations
+	self.ratios = {}
+	self.colors_per_bar = {}
+	if self.animate_intro == true then
+		if self.intro_timer >= 0 then
+			self.intro_timer = self.intro_timer - dt
+			self.intro_timer_mapped = self.intro_timer*self.h/self.intro_length
+		end
+	end
+	-- update the datas in case they have ch-ch-ch-cha-CHAAANGES
+	if self.dynamic_scale == true then
+		self.max = TableMax(self.data)
+	end
+	self.tick_val = self.max / self.ticks
+	
+	for index, data in ipairs(self.data) do
+		-- find highest data point
+		local max = self.max
+		local ratio = data/max
+		table.insert(self.ratios, ratio)
+		local color_index_precise = (data*#self.colors-1)/max
+		local color_index = math.floor(color_index_precise)+1
+		--if color_index == 0 then color_index = 1 end
+		-- insert the color for the bar
+		table.insert(self.colors_per_bar, self.colors[color_index])
+		local bar_h = ratio*(self.h-self.margin_ver*2-self.margin_ver/5)
+		self.mapped_data[index] = bar_h
+	end
+
 end
 
 ---@param self self
@@ -137,23 +184,37 @@ function BarGraphDraw(self)
 	love.graphics.clear(self.background)
 	love.graphics.setColor(self.accent_color)
 	love.graphics.setLineWidth(self.box_outline_thickness)
-	love.graphics.rectangle("line",self.margin_hor,self.margin_ver,self.w-self.margin_hor*2,self.h-self.margin_ver*2)
+	if self.box_outline == true then
+		love.graphics.rectangle("line",self.margin_hor,self.margin_ver,self.w-self.margin_hor*2,self.h-self.margin_ver*2)
+	end
 	-- run through categories
 	for i, label in ipairs(self.labels) do
 		local bar_color_cycle = self.colors[i % #self.colors+1]
 		local bar_color_by_val = self.colors_per_bar[i]
+		if bar_color_by_val == nil then
+			bar_color_by_val = self.colors_per_bar[1]
+		end
 		if self.color_type == "cycle" then
 			love.graphics.setColor(bar_color_cycle)
 		elseif self.color_type == "value" then
 			love.graphics.setColor(bar_color_by_val)
 		end
 		love.graphics.setLineWidth(self.box_outline_thickness)
-		love.graphics.rectangle("fill",self.bar_spacing+self.margin_hor+self.bar_width*(i-1),self.h-self.margin_ver,self.bar_width-self.bar_spacing*2,-(self.mapped_data[i]))
+		local bar_height = (self.mapped_data[i])
+		if self.animate_intro == true then
+			bar_height = bar_height - self.intro_timer_mapped
+			if bar_height < 0 then
+				bar_height = 0
+			end
+		end
+		love.graphics.rectangle("fill",self.bar_spacing+self.margin_hor+self.bar_width*(i-1),self.h-self.margin_ver,self.bar_width-self.bar_spacing*2,-bar_height)
 		if self.hide_x_labels == false then
 			love.graphics.print(label, self.margin_hor+self.bar_width*(i-1)+self.x_label_offset_x, self.h-self.margin_ver+self.x_label_offset_y)
 		end
-		love.graphics.setColor(self.box_outline_color)
-		love.graphics.rectangle("line",self.bar_spacing+self.margin_hor+self.bar_width*(i-1),self.h-self.margin_ver,self.bar_width-self.bar_spacing*2,-(self.mapped_data[i]))
+		if self.bar_outline == true then
+			love.graphics.setColor(self.box_outline_color)
+			love.graphics.rectangle("line",self.bar_spacing+self.margin_hor+self.bar_width*(i-1),self.h-self.margin_ver,self.bar_width-self.bar_spacing*2,-bar_height)
+		end
 	end
 	love.graphics.setColor(self.accent_color)
 	for i, y_pos in ipairs(self.tick_pos) do
@@ -188,10 +249,10 @@ function DrawGraphs()
 	end
 end
 
-function UpdGraphs()
+function UpdGraphs(dt)
 	for i, obj in ipairs(graph_manager) do
 		if obj.upd ~= nil then
-			obj:upd()
+			obj:upd(dt)
 		end
 	end
 end
@@ -229,10 +290,14 @@ end
 ---@param x number
 ---@param places integer
 function RoundToDecimalPlaces(x, places)
-    local mult_collector = 10
+    local mult_collector = 1
     -- for each decimal place, multiply by 10
-    for i = 1, places do
-        mult_collector = mult_collector * 10
+    if places > 0 then -- if we have a decimal to round to
+    	for i = 1, places do
+  	    	mult_collector = mult_collector * 10
+    	end
+    --elseif places == 0 then -- for rounding to a whole number
+    --	mult_collector = 1
     end
     -- multiply that into the input
     local big_buffer = x*mult_collector
