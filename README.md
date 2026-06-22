@@ -1,6 +1,8 @@
 ### LÖVEPlötLib
 v0.0.2
 
+<img width="320" height="240" alt="loveplotlib-gif-preview" src="https://github.com/user-attachments/assets/75993dd2-3095-4670-bc72-4d31077cebd3" />
+
 I'm a busy girl and I still have an engine to make, so rather than giving you a placeholder AI doc to slog through, I'm gonna give you a really good example script that makes use of a ton of different features and let you figure it out from there. If you've used matplotlib you'll understand the syntax in like two seconds, and if not you'll be fine because it's easy to copy. Probably 95% of the properties you can access are initialized right near the top of the script in `CreateGraphFromData`, if you're looking for something not used in the example.
 
 If you'd like to contribute legit wiki-style documentation, feel free to take a stab at it!
