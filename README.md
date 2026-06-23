@@ -6,6 +6,8 @@ v0.0.2
 
 <img width="320" height="240" alt="loveplotlib-gif-preview" src="https://github.com/user-attachments/assets/75993dd2-3095-4670-bc72-4d31077cebd3" />
 
+I made this over a weekend after doing a research project with MatPlotLib for the first time, while working on a game on the train there and back. And then I was like, "What if I could do this kind of data visualization for my game?" because it's a pretty numbers-heavy strat RPG. So I figured what the hell let me make a MatPlotLib clone for LÖVE.
+
 I'm a busy girl and I still have an engine to make, so rather than giving you a crappy filler placeholder doc to slog through, I'm gonna give you a really good example script that makes use of a ton of different features, and then let you figure it out from there. If you've used matplotlib you'll understand the syntax in like two seconds, and if not you'll be fine because it's easy to copy. Probably 95% of the properties you can access are initialized right near the top of the script in `CreateGraphFromData`, if you're looking for something not used in the example.
 
 If you'd like to contribute legit wiki-style documentation or add a new feature or two, feel free to take a stab at it!
@@ -13,6 +15,8 @@ If you'd like to contribute legit wiki-style documentation or add a new feature 
 Really the main thing I didn't hit in the example is using ClearGraphs() to get rid of all the graphs in memory, that might come in handy.
 
 The default color palette ("amber phosphor 16") is sampled from my photo-art work with an amber monochrome CRT monitor from the early 80s. Check out [katecursed.art](https://katecursed.art) to see those & my other media art!
+
+No code in this repository is LLM-generated! The architectural dumpster fire that is this project is my responsibility alone.
 
 Example main.lua file (also included as example.lua in this repo). Draws the memory monitor/framerate counter from the gif at the top of this file!
 ```
