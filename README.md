@@ -1,15 +1,18 @@
 ### LÖVEPlötLib
+
+Katherina "Kate the Cursed" Jesek - [katecursed.art](https://katecursed.art)
+
 v0.0.2
 
 <img width="320" height="240" alt="loveplotlib-gif-preview" src="https://github.com/user-attachments/assets/75993dd2-3095-4670-bc72-4d31077cebd3" />
 
 I'm a busy girl and I still have an engine to make, so rather than giving you a crappy filler placeholder doc to slog through, I'm gonna give you a really good example script that makes use of a ton of different features, and then let you figure it out from there. If you've used matplotlib you'll understand the syntax in like two seconds, and if not you'll be fine because it's easy to copy. Probably 95% of the properties you can access are initialized right near the top of the script in `CreateGraphFromData`, if you're looking for something not used in the example.
 
-If you'd like to contribute legit wiki-style documentation, feel free to take a stab at it!
+If you'd like to contribute legit wiki-style documentation or add a new feature or two, feel free to take a stab at it!
 
 Really the main thing I didn't hit in the example is using ClearGraphs() to get rid of all the graphs in memory, that might come in handy.
 
-The default color palette ("amber phosphor 16") is sampled from my photo-art work with an amber monochrome CRT monitor from the early 80s. Check out katecursed.art to see those & my other media art!
+The default color palette ("amber phosphor 16") is sampled from my photo-art work with an amber monochrome CRT monitor from the early 80s. Check out [katecursed.art](https://katecursed.art) to see those & my other media art!
 
 Example main.lua file (also included as example.lua in this repo). Draws the memory monitor/framerate counter from the gif at the top of this file!
 ```
