@@ -6,13 +6,20 @@ by Katherina "Kate the Cursed" Jesek - [katecursed.art](https://katecursed.art)
 
 Easy graphing library for LÖVE2D, based on MatPlotLib's object syntax!
 
+
+
 <img width="320" height="240" alt="loveplotlib-gif-preview" src="https://github.com/user-attachments/assets/75993dd2-3095-4670-bc72-4d31077cebd3" />
 
 Types of graphs at the moment:
+
 	- Bar (vertical only)
+	
 	- Line
+	
 	- Scatter Plot (aka Dot Plot)
+	
 	- Polygon Plot (aka Radar Graph)
+	
 
 I made this over a weekend after doing a research project with MatPlotLib for the first time, while working on a game on the train there and back. So then I was like, "What if I could do this kind of data visualization for my game?" because it's a pretty numbers-heavy strat RPG. So I figured what the hell let me make a MatPlotLib clone for LÖVE.
 
