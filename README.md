@@ -9,6 +9,8 @@ If you'd like to contribute legit wiki-style documentation, feel free to take a 
 
 Really the main thing I didn't hit in the example is using ClearGraphs() to get rid of all the graphs in memory, that might come in handy.
 
+The default color palette ("amber phosphor 16") is sampled from my photo-art work with an amber monochrome CRT monitor from the early 80s. Check out katecursed.art to see those & my other media art!
+
 Example main.lua file (also included as example.lua in this repo). Draws the memory monitor/framerate counter from the gif at the top of this file!
 ```
 local plt = require "graph-snippet"
