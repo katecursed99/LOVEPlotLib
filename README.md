@@ -6,7 +6,7 @@ v0.0.2
 
 <img width="320" height="240" alt="loveplotlib-gif-preview" src="https://github.com/user-attachments/assets/75993dd2-3095-4670-bc72-4d31077cebd3" />
 
-I made this over a weekend after doing a research project with MatPlotLib for the first time, while working on a game on the train there and back. And then I was like, "What if I could do this kind of data visualization for my game?" because it's a pretty numbers-heavy strat RPG. So I figured what the hell let me make a MatPlotLib clone for LÖVE.
+I made this over a weekend after doing a research project with MatPlotLib for the first time, while working on a game on the train there and back. So then I was like, "What if I could do this kind of data visualization for my game?" because it's a pretty numbers-heavy strat RPG. So I figured what the hell let me make a MatPlotLib clone for LÖVE.
 
 I'm a busy girl and I still have an engine to make, so rather than giving you a crappy filler placeholder doc to slog through, I'm gonna give you a really good example script that makes use of a ton of different features, and then let you figure it out from there. If you've used matplotlib you'll understand the syntax in like two seconds, and if not you'll be fine because it's easy to copy. Probably 95% of the properties you can access are initialized right near the top of the script in `CreateGraphFromData`, if you're looking for something not used in the example.
 
